@@ -1,0 +1,66 @@
+# Build outputs
+.gradle/
+build/
+out/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Compiled / packaged artifacts
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+output-metadata.json
+
+# Local Android config
+local.properties
+
+# IDE files
+*.iml
+.idea/
+*.ipr
+*.iws
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.old
+*~
+
+# Keystore / signing secrets
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Google / Firebase / API config that may be sensitive
+google-services.json
+firebase-config.json
+*.json
+
+# Env / secret files
+.env
+.env.*
+secrets.properties
+secret.properties
+credentials.properties
+*.secret
+*.token
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Java / Android caches
+bin/
+gen/
+target/
+__pycache__/
+*.pyc
