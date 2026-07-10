@@ -30,7 +30,7 @@ implementation = ["androidx.appcompat:appcompat:1.7.0", "com.squareup.okhttp3:ok
 [android]
 namespace = "com.aetherix.search"
 compileSdk = 34
-minSdk = 24
+minSdk = 23
 targetSdk = 34
 manifest = "src/main/AndroidManifest.xml"
 versionCode = 1

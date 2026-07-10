@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tavily API Key"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etApiKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="tvly-your-key-here"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Depth"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/rgSearchDepth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton android:id="@+id/rbBasic" android:text="Basic" android:checked="true"/>
+            <RadioButton android:id="@+id/rbAdvanced" android:text="Advanced"/>
+            <RadioButton android:id="@+id/rbFast" android:text="Fast"/>
+            <RadioButton android:id="@+id/rbUltraFast" android:text="Ultra Fast"/>
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max Results"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <RadioGroup
+            android:id="@+id/rgMaxResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton android:id="@+id/rb5" android:text="5" android:checked="true"/>
+            <RadioButton android:id="@+id/rb10" android:text="10"/>
+            <RadioButton android:id="@+id/rb15" android:text="15"/>
+            <RadioButton android:id="@+id/rb20" android:text="20"/>
+        </RadioGroup>
+
+        <Switch
+            android:id="@+id/swIncludeAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Include AI Answer"
+            android:checked="true"
+            android:layout_marginTop="16dp"/>
+
+        <Switch
+            android:id="@+id/swIncludeRawContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Include Raw Content"
+            android:layout_marginTop="8dp"/>
+
+        <Switch
+            android:id="@+id/swIncludeImages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Include Images"
+            android:layout_marginTop="8dp"/>
+
+        <Switch
+            android:id="@+id/swIncludeImageDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Include Image Descriptions"
+            android:layout_marginTop="8dp"/>
+
+        <Switch
+            android:id="@+id/swIncludeFavicon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Include Favicons"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Default Topic"
+            android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/etDefaultTopic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="general, news, or finance"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time Range (day/week/month/year)"
+            android:layout_marginTop="8dp"/>
+        <EditText
+            android:id="@+id/etTimeRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country Code (us, gb, etc.)"
+            android:layout_marginTop="8dp"/>
+        <EditText
+            android:id="@+id/etCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Settings"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset to Defaults"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+</ScrollView>

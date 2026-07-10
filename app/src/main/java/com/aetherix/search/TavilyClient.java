@@ -56,7 +56,7 @@ public class TavilyClient {
 
     public void search(String query, SearchParams params, final TavilyCallback callback) {
         if (apiKey == null || apiKey.isEmpty()) {
-            callback.onError("Tavily API key not configured. Please check your .env file.", 0);
+            callback.onError("Tavily API key not configured. Please go to Settings and enter your key.", 0);
             return;
         }
 
@@ -234,7 +234,7 @@ public class TavilyClient {
         }
         
         if (statusCode == 401) {
-            errorMsg = errorMsg + ". Check your API key in .env file.";
+            errorMsg = errorMsg + ". Check your API key in Settings.";
         } else if (statusCode == 429) {
             errorMsg = errorMsg + ". Rate limit exceeded. Please wait a moment.";
         } else if (statusCode == 432) {
@@ -385,6 +385,7 @@ public class TavilyClient {
         
         return output.toString();
     }
+
     public String getSessionId() {
         return sessionId;
     }
