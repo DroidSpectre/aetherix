@@ -149,49 +149,75 @@ public class TavilyClient {
         JSONObject requestBody = new JSONObject();
         
         requestBody.put("query", query);
-        requestBody.put("search_depth", params.searchDepth);
+        requestBody.put("include_usage", true);
+        
+        // Always send these required manual params
         requestBody.put("max_results", params.maxResults);
         requestBody.put("include_answer", params.includeAnswer);
         requestBody.put("include_raw_content", params.includeRawContent);
-        requestBody.put("include_usage", true);
         
-        if (params.topic != null && !params.topic.isEmpty()) {
-            requestBody.put("topic", params.topic);
-        }
-        
-        if (params.timeRange != null && !params.timeRange.isEmpty()) {
-            requestBody.put("time_range", params.timeRange);
-        }
-        
-        if (params.country != null && !params.country.isEmpty()) {
-            requestBody.put("country", params.country);
-        }
-        
-        if (params.includeDomains != null && params.includeDomains.length > 0) {
-            JSONArray domains = new JSONArray();
-            for (int i = 0; i < params.includeDomains.length; i = i + 1) {
-                domains.put(params.includeDomains[i]);
+        if (params.autoParameters) {
+            // AUTO MODE: Let Tavily configure depth, topic, time_range, country, etc.
+            requestBody.put("auto_parameters", true);
+            
+            // Topic from MainActivity spinner can still override auto
+            if (params.topic != null && !params.topic.isEmpty()) {
+                requestBody.put("topic", params.topic);
             }
-            requestBody.put("include_domains", domains);
-        }
-        
-        if (params.excludeDomains != null && params.excludeDomains.length > 0) {
-            JSONArray domains = new JSONArray();
-            for (int i = 0; i < params.excludeDomains.length; i = i + 1) {
-                domains.put(params.excludeDomains[i]);
+            
+            // Images/favicon are always manual since they affect response size
+            if (params.includeImages) {
+                requestBody.put("include_images", true);
+                if (params.includeImageDescriptions) {
+                    requestBody.put("include_image_descriptions", true);
+                }
             }
-            requestBody.put("exclude_domains", domains);
-        }
-        
-        if (params.includeImages) {
-            requestBody.put("include_images", true);
-            if (params.includeImageDescriptions) {
-                requestBody.put("include_image_descriptions", true);
+            if (params.includeFavicon) {
+                requestBody.put("include_favicon", true);
             }
-        }
-        
-        if (params.includeFavicon) {
-            requestBody.put("include_favicon", true);
+        } else {
+            // MANUAL MODE: Send all explicit settings
+            requestBody.put("auto_parameters", false);
+            requestBody.put("search_depth", params.searchDepth);
+            
+            if (params.topic != null && !params.topic.isEmpty()) {
+                requestBody.put("topic", params.topic);
+            }
+            
+            if (params.timeRange != null && !params.timeRange.isEmpty()) {
+                requestBody.put("time_range", params.timeRange);
+            }
+            
+            if (params.country != null && !params.country.isEmpty()) {
+                requestBody.put("country", params.country);
+            }
+            
+            if (params.includeDomains != null && params.includeDomains.length > 0) {
+                JSONArray domains = new JSONArray();
+                for (int i = 0; i < params.includeDomains.length; i = i + 1) {
+                    domains.put(params.includeDomains[i]);
+                }
+                requestBody.put("include_domains", domains);
+            }
+            
+            if (params.excludeDomains != null && params.excludeDomains.length > 0) {
+                JSONArray domains = new JSONArray();
+                for (int i = 0; i < params.excludeDomains.length; i = i + 1) {
+                    domains.put(params.excludeDomains[i]);
+                }
+                requestBody.put("exclude_domains", domains);
+            }
+            
+            if (params.includeImages) {
+                requestBody.put("include_images", true);
+                if (params.includeImageDescriptions) {
+                    requestBody.put("include_image_descriptions", true);
+                }
+            }
+            
+            if (params.includeFavicon) {
+                requestBody.put("include_favicon", true);
+            }
         }
         
         JSONObject sessionParams = new JSONObject();
@@ -391,6 +417,7 @@ public class TavilyClient {
     }
 
     public static class SearchParams {
+        public boolean autoParameters;
         public String searchDepth;
         public int maxResults;
         public boolean includeAnswer;
@@ -405,6 +432,7 @@ public class TavilyClient {
         public boolean includeFavicon;
 
         private SearchParams(Builder builder) {
+            this.autoParameters = builder.autoParameters;
             this.searchDepth = builder.searchDepth;
             this.maxResults = builder.maxResults;
             this.includeAnswer = builder.includeAnswer;
@@ -420,6 +448,7 @@ public class TavilyClient {
         }
 
         public static class Builder {
+            private boolean autoParameters = false;
             private String searchDepth = "basic";
             private int maxResults = 5;
             private boolean includeAnswer = true;
@@ -432,6 +461,11 @@ public class TavilyClient {
             private boolean includeImages = false;
             private boolean includeImageDescriptions = false;
             private boolean includeFavicon = false;
+
+            public Builder setAutoParameters(boolean auto) {
+                this.autoParameters = auto;
+                return this;
+            }
 
             public Builder setSearchDepth(String depth) {
                 if ("basic".equals(depth) || "advanced".equals(depth) || 

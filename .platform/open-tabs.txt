@@ -1,5 +1,1 @@
-3
-/storage/emulated/0/Android/data/com.tyron.code/files/codeassist/projects/aetherix/app/src/main/res/layout/activity_settings.xml
-/storage/emulated/0/Android/data/com.tyron.code/files/codeassist/projects/aetherix/app/src/main/java/com/aetherix/search/MainActivity.java
-/storage/emulated/0/Android/data/com.tyron.code/files/codeassist/projects/aetherix/app/src/main/java/com/aetherix/search/SettingsActivity.java
-/storage/emulated/0/Android/data/com.tyron.code/files/codeassist/projects/aetherix/app/src/main/java/com/aetherix/search/TavilyClient.java
+-1

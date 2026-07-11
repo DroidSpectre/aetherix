@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- API Key -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,111 +26,177 @@
             android:inputType="textPassword"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Auto Mode -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swAutoMode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Search Depth"
+            android:text="Auto Mode (Recommended)"
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
-
-        <RadioGroup
-            android:id="@+id/rgSearchDepth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton android:id="@+id/rbBasic" android:text="Basic" android:checked="true"/>
-            <RadioButton android:id="@+id/rbAdvanced" android:text="Advanced"/>
-            <RadioButton android:id="@+id/rbFast" android:text="Fast"/>
-            <RadioButton android:id="@+id/rbUltraFast" android:text="Ultra Fast"/>
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Max Results"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"/>
-
-        <RadioGroup
-            android:id="@+id/rgMaxResults"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton android:id="@+id/rb5" android:text="5" android:checked="true"/>
-            <RadioButton android:id="@+id/rb10" android:text="10"/>
-            <RadioButton android:id="@+id/rb15" android:text="15"/>
-            <RadioButton android:id="@+id/rb20" android:text="20"/>
-        </RadioGroup>
-
-        <Switch
-            android:id="@+id/swIncludeAnswer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Include AI Answer"
             android:checked="true"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
-        <Switch
-            android:id="@+id/swIncludeRawContent"
+        <!-- Manual Settings -->
+        <LinearLayout
+            android:id="@+id/manualSettingsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Include Raw Content"
-            android:layout_marginTop="8dp"/>
+            android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/swIncludeImages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Include Images"
-            android:layout_marginTop="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search Depth"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
 
-        <Switch
-            android:id="@+id/swIncludeImageDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Include Image Descriptions"
-            android:layout_marginTop="8dp"/>
+            <RadioGroup
+                android:id="@+id/rgSearchDepth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/rbBasic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Basic"
+                    android:checked="true"/>
+                <RadioButton
+                    android:id="@+id/rbAdvanced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Advanced"/>
+                <RadioButton
+                    android:id="@+id/rbFast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fast"/>
+                <RadioButton
+                    android:id="@+id/rbUltraFast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ultra Fast"/>
+            </RadioGroup>
 
-        <Switch
-            android:id="@+id/swIncludeFavicon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Include Favicons"
-            android:layout_marginTop="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max Results"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default Topic"
-            android:layout_marginTop="16dp"/>
-        <EditText
-            android:id="@+id/etDefaultTopic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="general, news, or finance"/>
+            <RadioGroup
+                android:id="@+id/rgMaxResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:checked="true"/>
+                <RadioButton
+                    android:id="@+id/rb10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"/>
+                <RadioButton
+                    android:id="@+id/rb15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"/>
+                <RadioButton
+                    android:id="@+id/rb20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"/>
+            </RadioGroup>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time Range (day/week/month/year)"
-            android:layout_marginTop="8dp"/>
-        <EditText
-            android:id="@+id/etTimeRange"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swIncludeAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Include AI Answer"
+                android:checked="true"
+                android:layout_marginTop="16dp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swIncludeRawContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Include Raw Content"
+                android:layout_marginTop="8dp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swIncludeImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Include Images"
+                android:layout_marginTop="8dp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swIncludeImageDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Include Image Descriptions"
+                android:layout_marginTop="8dp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swIncludeFavicon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Include Favicons"
+                android:layout_marginTop="8dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Country Code (us, gb, etc.)"
-            android:layout_marginTop="8dp"/>
-        <EditText
-            android:id="@+id/etCountry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Default Topic"
+                android:layout_marginTop="16dp"/>
+            <Spinner
+                android:id="@+id/spinnerTopic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time Range"
+                android:layout_marginTop="8dp"/>
+            <Spinner
+                android:id="@+id/spinnerTimeRange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Country Code"
+                android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="us, gb, etc."/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Include Domains (comma separated)"
+                android:layout_marginTop="16dp"/>
+            <EditText
+                android:id="@+id/etIncludeDomains"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="example.com,news.com"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exclude Domains (comma separated)"
+                android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etExcludeDomains"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="spam.com,bad.com"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnSave"

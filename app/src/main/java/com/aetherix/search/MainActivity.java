@@ -169,26 +169,73 @@ public class MainActivity extends AppCompatActivity {
     private TavilyClient.SearchParams buildSearchParamsFromSettings() {
         SharedPreferences prefs = getSharedPreferences("aetherix_prefs", MODE_PRIVATE);
         TavilyClient.SearchParams.Builder builder = new TavilyClient.SearchParams.Builder();
+        
+        boolean autoMode = prefs.getBoolean("auto_mode", true);
 
-        String depth = prefs.getString("search_depth", "basic");
-        builder.setSearchDepth(depth);
-
+        // Per Tavily docs: max_results, include_answer, include_raw_content
+        // must ALWAYS be set manually as they affect response size
         int maxResults = prefs.getInt("max_results", 5);
         builder.setMaxResults(maxResults);
-
         builder.setIncludeAnswer(prefs.getBoolean("include_answer", true));
         builder.setIncludeRawContent(prefs.getBoolean("include_raw_content", false));
-        builder.setIncludeImages(prefs.getBoolean("include_images", false));
-        builder.setIncludeImageDescriptions(prefs.getBoolean("include_image_descriptions", false));
-        builder.setIncludeFavicon(prefs.getBoolean("include_favicon", false));
 
-        String topicToUse = selectedTopic != null ? selectedTopic : prefs.getString("default_topic", null);
-        if (topicToUse != null && !topicToUse.isEmpty()) {
-            builder.setTopic(topicToUse);
+        if (autoMode) {
+            // ═══════════════════════════════════════════════
+            // AUTO MODE: Let Tavily auto-configure everything
+            // ═══════════════════════════════════════════════
+            builder.setAutoParameters(true);
+            
+            // Topic from MainActivity spinner can still override auto
+            // (user explicitly chose a topic from the dropdown)
+            if (selectedTopic != null) {
+                builder.setTopic(selectedTopic);
+            }
+            
+            // Images/favicon are always manual since they affect response size
+            builder.setIncludeImages(prefs.getBoolean("include_images", false));
+            builder.setIncludeImageDescriptions(prefs.getBoolean("include_image_descriptions", false));
+            builder.setIncludeFavicon(prefs.getBoolean("include_favicon", false));
+            
+        } else {
+            // ═══════════════════════════════════════════════
+            // MANUAL MODE: Send all explicit user settings
+            // ═══════════════════════════════════════════════
+            builder.setAutoParameters(false);
+            
+            String depth = prefs.getString("search_depth", "basic");
+            builder.setSearchDepth(depth);
+            
+            builder.setIncludeImages(prefs.getBoolean("include_images", false));
+            builder.setIncludeImageDescriptions(prefs.getBoolean("include_image_descriptions", false));
+            builder.setIncludeFavicon(prefs.getBoolean("include_favicon", false));
+
+            String topicToUse = selectedTopic != null ? selectedTopic : prefs.getString("default_topic", null);
+            if (topicToUse != null && !topicToUse.isEmpty()) {
+                builder.setTopic(topicToUse);
+            }
+
+            builder.setTimeRange(prefs.getString("time_range", null));
+            builder.setCountry(prefs.getString("country", null));
+            
+            // Handle include/exclude domains
+            String includeDomainsStr = prefs.getString("include_domains", "");
+            if (!includeDomainsStr.isEmpty()) {
+                String[] domains = includeDomainsStr.split(",");
+                for (int i = 0; i < domains.length; i++) {
+                    domains[i] = domains[i].trim();
+                }
+                builder.setIncludeDomains(domains);
+            }
+            
+            String excludeDomainsStr = prefs.getString("exclude_domains", "");
+            if (!excludeDomainsStr.isEmpty()) {
+                String[] domains = excludeDomainsStr.split(",");
+                for (int i = 0; i < domains.length; i++) {
+                    domains[i] = domains[i].trim();
+                }
+                builder.setExcludeDomains(domains);
+            }
         }
-
-        builder.setTimeRange(prefs.getString("time_range", null));
-        builder.setCountry(prefs.getString("country", null));
 
         return builder.build();
     }

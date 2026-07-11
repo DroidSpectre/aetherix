@@ -2,7 +2,9 @@ Latest version adds a Settings page within the app to conrol search parameters.
 
 Search Parameters available:
     
-    Tavily Search Depth Settings & Configuration Guide 
+    Tavily Search Depth Settings 
+                & 
+        Configuration Guide 
            
             Written by: 
            DroidSpectre
